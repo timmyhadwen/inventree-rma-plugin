@@ -38,7 +38,7 @@ class RMAAutomationPlugin(AppMixin, UserInterfaceMixin, UrlsMixin, EventMixin, S
     SLUG = 'rma-automation'
     TITLE = 'RMA Workflow Automation'
     DESCRIPTION = 'Automates stock status changes and repair parts tracking for return orders'
-    VERSION = '0.2.1'
+    VERSION = '0.2.2'
     AUTHOR = 'Timmy Hadwen'
 
     # Status code constants (from InvenTree)

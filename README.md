@@ -58,6 +58,19 @@ Or install from git:
 git+https://github.com/timmyhadwen/inventree-rma-plugin.git
 ```
 
+### Via the InvenTree Plugin Install Dialog (GUI)
+
+In **Settings → Plugins → Install Plugin**:
+
+- **Package Name:** `git+https://github.com/timmyhadwen/inventree-rma-plugin.git`
+- **Source URL:** *leave blank*
+- **Confirm plugin installation:** on
+
+Notes:
+- Use `https`, not `http` — pip's git transport will not follow GitHub's HTTP→HTTPS redirect, and the install will fail with `ERROR: You must give at least one requirement to install`.
+- Put the `git+https://...` spec in the **Package Name** field, not Source URL. Source URL is for a custom PyPI index, not a VCS path.
+- After install, restart the InvenTree server (or trigger a plugin reload) so the new code is loaded.
+
 ## Configuration
 
 After installation, enable the plugin in InvenTree's admin panel under Settings > Plugins.

@@ -1,9 +1,15 @@
 """API endpoints for the RMA Automation plugin."""
 
+from decimal import Decimal
+
 from rest_framework import serializers, generics, permissions
 from rest_framework.response import Response
 
 from inventree_rma_plugin.models import RepairStockAllocation
+
+
+def _to_decimal(value):
+    return Decimal(str(value))
 
 
 class RepairAllocationSerializer(serializers.ModelSerializer):
@@ -84,25 +90,24 @@ class RepairAllocationSerializer(serializers.ModelSerializer):
         quantity = data.get('quantity', 1)
 
         if stock_item:
-            # Check available quantity
-            available = stock_item.quantity
+            available = _to_decimal(stock_item.quantity)
 
-            # Subtract existing allocations for this stock item
             existing_allocations = RepairStockAllocation.objects.filter(
                 stock_item=stock_item,
                 consumed=False,
             )
-
-            # Exclude current instance if updating
             if self.instance:
                 existing_allocations = existing_allocations.exclude(pk=self.instance.pk)
 
-            allocated = sum(a.quantity for a in existing_allocations)
-            available -= allocated
+            allocated = sum(
+                (_to_decimal(a.quantity) for a in existing_allocations),
+                Decimal('0'),
+            )
+            remaining = available - allocated
 
-            if quantity > available:
+            if _to_decimal(quantity) > remaining:
                 raise serializers.ValidationError({
-                    'quantity': f'Only {available} available (already allocated: {allocated})',
+                    'quantity': f'Only {remaining} available (already allocated: {allocated})',
                 })
 
         return data
