@@ -97,7 +97,7 @@ class RepairAllocationSerializer(serializers.ModelSerializer):
             if self.instance:
                 existing_allocations = existing_allocations.exclude(pk=self.instance.pk)
 
-            allocated = sum(float(a.quantity) for a in existing_allocations)
+            allocated = sum(a.quantity for a in existing_allocations)
             available -= allocated
 
             if quantity > available:
