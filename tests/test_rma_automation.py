@@ -61,7 +61,7 @@ class TestRMAAutomationPlugin(TestCase):
         """Test plugin metadata is correctly defined."""
         self.assertEqual(self.plugin.NAME, 'RMA Automation')
         self.assertEqual(self.plugin.SLUG, 'rma-automation')
-        self.assertEqual(self.plugin.VERSION, '0.2.0')
+        self.assertEqual(self.plugin.VERSION, '0.2.1')
         self.assertEqual(self.plugin.AUTHOR, 'Timmy Hadwen')
 
     def test_wants_process_event_returns_true_for_returnorder_completed(self):

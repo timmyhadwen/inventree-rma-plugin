@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "inventree-rma-plugin"
-version = "0.2.0"
+version = "0.2.1"
 description = "InvenTree plugin for automating RMA workflow with repair parts tracking"
 readme = "README.md"
 license = {text = "MIT"}
